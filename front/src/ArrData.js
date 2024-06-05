@@ -1,5 +1,6 @@
 const productsToPreLoad = [
   {
+    id: 1,
     name: "iPhone 12 Pro",
     price: 999,
     description:
@@ -10,6 +11,7 @@ const productsToPreLoad = [
     stock: 15,
   },
   {
+    id: 2,
     name: "iPad Air",
     price: 599,
     description:
@@ -20,6 +22,7 @@ const productsToPreLoad = [
     stock: 15,
   },
   {
+    id: 3,
     name: "Apple Magic Keyboard",
     price: 99,
     description:
@@ -30,6 +33,7 @@ const productsToPreLoad = [
     stock: 25,
   },
   {
+    id: 2,
     name: "MacBook Pro 13 pulgadas",
     price: 1299,
     description:
@@ -40,6 +44,7 @@ const productsToPreLoad = [
     stock: 18,
   },
   {
+    id: 4,
     name: "iPad Air",
     price: 599,
     description:
@@ -50,6 +55,7 @@ const productsToPreLoad = [
     stock: 22,
   },
   {
+    id: 5,
     name: "Apple TV 4K",
     price: 179,
     description:
@@ -60,6 +66,7 @@ const productsToPreLoad = [
     stock: 20,
   },
   {
+    id: 6,
     name: "Apple Pencil (2da generación)",
     price: 129,
     description:
@@ -70,6 +77,7 @@ const productsToPreLoad = [
     stock: 23,
   },
   {
+    id: 7,
     name: "Apple TV HD",
     price: 149,
     description:
@@ -80,6 +88,7 @@ const productsToPreLoad = [
     stock: 18,
   },
   {
+    id: 8,
     name: "iPhone 13",
     price: 799,
     description:
@@ -90,6 +99,7 @@ const productsToPreLoad = [
     stock: 15,
   },
   {
+    id: 9,
     name: "Apple TV 4K (2da generación)",
     price: 179,
     description:
@@ -100,6 +110,7 @@ const productsToPreLoad = [
     stock: 17,
   },
   {
+    id: 10,
     name: "Cargador Apple MagSafe",
     price: 39,
     description:
@@ -110,6 +121,7 @@ const productsToPreLoad = [
     stock: 23,
   },
   {
+    id: 11,
     name: "Cable Apple Thunderbolt 3 (USB-C) (0.8m)",
     price: 39,
     description:
@@ -120,6 +132,7 @@ const productsToPreLoad = [
     stock: 16,
   },
   {
+    id: 12,
     name: "Adaptador Apple USB-C Digital AV Multiport",
     price: 69,
     description:
@@ -130,6 +143,7 @@ const productsToPreLoad = [
     stock: 17,
   },
   {
+    id: 13,
     name: "Adaptador de corriente USB-C de 20W de Apple",
     price: 19,
     description:

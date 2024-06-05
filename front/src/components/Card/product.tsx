@@ -1,17 +1,21 @@
-// import { CardProps } from "./types";
-
-import productsToPreLoad from '../../ArrData';
+import { fetchProducts } from '@/helpers/product.helper';
 import Card from '.';
 
 
-const Product: React.FC= () => {
+const ProductFetch = async () => {
+    const res = await fetch('http://localhost:3002/products');
+    const data = await res.json();
+    return data
+}
 
+const Product: React.FC = async () => {
+    const productsToPreLoad = await fetchProducts();
 
     return (
-        <div className="flex min-h-screen items-center justify-around bg-slate-100 flex-wrap">
+        <div className="flex items-center justify-around flex-wrap mt-10">
             {
-                productsToPreLoad.map((product) => (
-                    <Card key={product.name} {...product}/>
+                productsToPreLoad.map((product: any) => (
+                    <Card key={product.id} {...product} />
                 ))
             }
         </div>
