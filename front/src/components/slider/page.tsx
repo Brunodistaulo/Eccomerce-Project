@@ -25,7 +25,7 @@ const Carousel: React.FC = () => {
         <div className="-ml-1 overflow-hidden relative h-[550px]">
           <div className={`absolute inset-0 transition-transform duration-700 ease-in-out ${currentIndex === 0 ? 'block' : 'hidden'}`}>
             <img
-              src="https://pbs.twimg.com/media/GPG0m4eXYAAzHbC?format=jpg&name=4096x4096"
+              src="https://static.vecteezy.com/system/resources/previews/004/672/772/non_2x/flash-sale-banner-design-template-offer-shopping-on-dark-blue-background-free-vector.jpg"
               className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
               alt="Slide 1"
             />

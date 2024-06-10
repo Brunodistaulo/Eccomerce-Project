@@ -2,12 +2,6 @@ import { fetchProducts } from '@/helpers/product.helper';
 import Card from '.';
 
 
-const ProductFetch = async () => {
-    const res = await fetch('http://localhost:3002/products');
-    const data = await res.json();
-    return data
-}
-
 const Product: React.FC = async () => {
     const productsToPreLoad = await fetchProducts();
 

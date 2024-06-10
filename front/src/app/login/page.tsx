@@ -2,16 +2,28 @@
 import React, { useEffect, useState } from 'react';
 import styles from './style.module.css';
 import { validateLogin, validateRegister } from '@/helpers/validate';
-import { loginPropError, registerPropError } from '@/types/types';
+import { loginPropError, registerPropError, userSession } from '@/types/types';
 import { LoginAuth, RegisterAuth } from '@/helpers/auth.helpers';
 import { useRouter } from 'next/navigation';
 
 const AuthForm = () => {
+  const router = useRouter();
   const [active, setActive] = useState(false);
+  const [userData, setUserData] = useState<userSession>();
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const userData: userSession = JSON.parse(localStorage.getItem('UserSession')!)
+      setUserData(userData)
+      userData?.token && alert('You are already logged in')
+      userData?.token && router.push('/') 
+  }
+
+  }, [])
 
   //* Logica del registro
 
-  const router = useRouter();
 
   const [dataRegister, setdataRegister] = useState({
     name: '',
@@ -35,23 +47,19 @@ const AuthForm = () => {
   const handleChangeRegister = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setdataRegister({ ...dataRegister, [name]: value });
+    const errors = validateRegister(dataRegister)
+    setErrorRegister(errors)
   }
   const handleSubmitRegister = async () => {
     try {
       const res = await RegisterAuth(dataRegister)
       console.log(res)
       alert('Register successful');
-      router.push('/login')
     } catch (error: any) {
       throw new Error(error);
     }
 
   }
-
-  useEffect(() => {
-    const errors = validateRegister(dataRegister)
-    setErrorRegister(errors)
-  }, [dataRegister])
 
   //* Logica del login
 
@@ -73,11 +81,11 @@ const AuthForm = () => {
   const handleSubmitLogin = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const res = LoginAuth(dataLogin);
+      const res = await LoginAuth(dataLogin);
       const { token, user } = await res;
       localStorage.setItem('UserSession', JSON.stringify({ token, userData: user }));
       alert('Login successful');
-      router.push('/home')
+      router.push('/')
     } catch (error: any) {
       throw new Error(error);
     }
@@ -124,8 +132,8 @@ const AuthForm = () => {
               name='address'
               value={dataRegister.address}
               onChange={handleChangeRegister}
-              type="text"
-              placeholder="Address" />
+              type='text'
+              placeholder='Address' />
             {errorRegister.phone && <q className={styles.error}>{errorRegister.phone}</q>}
             <input
               id='phone'
@@ -146,6 +154,7 @@ const AuthForm = () => {
               <a href="#" className={styles.icon}><i className="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email for password</span>
+            {error.email && <q className={styles.error}>{error.email}</q>}
             <input
               id='emailLogin'
               name='email'
@@ -153,7 +162,7 @@ const AuthForm = () => {
               onChange={handleChangeLogin}
               type='email'
               placeholder='Email' />
-            {error.email && <p>{error.email}</p>}
+            {error.password && <q className={styles.error}>{error.password}</q>}
             <input
               id='passwordLogin'
               name='password'
@@ -161,9 +170,8 @@ const AuthForm = () => {
               onChange={handleChangeLogin}
               type='password'
               placeholder='Password' />
-            {error.password && <p>{error.password}</p>}
             <a href="#">Forget Your Password?</a>
-            <button type="submit">Sign In</button>
+            <button type='submit'>Sign In</button>
           </form>
         </div>
         <div className={styles['toggle-container']}>

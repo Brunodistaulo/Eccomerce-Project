@@ -16,12 +16,12 @@ export async function RegisterAuth(userRegister: registerProp) {
         if (res.ok) {
             return res.json();
         } else {
-            alert('User already exists');
+            alert('Failed to register');
             throw new Error('Failed to register');
-
         }
     } catch (error: any) {
-        throw new Error(error);
+        console.log(error)
+        throw new Error(error)
     }
 };
 
@@ -38,6 +38,7 @@ export async function LoginAuth(userLogin: loginProp) {
         if (res.ok) {
             return res.json();
         } else {
+            alert('Failed to login');
             throw new Error('Failed to login');
         }
     } catch (error: any) {

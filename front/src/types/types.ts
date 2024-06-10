@@ -6,6 +6,7 @@ export interface CardProps {
   image: string;
 }
 
+
 export interface category {
   name: string;
 }
@@ -54,4 +55,8 @@ export interface IOrder {
   status: string;
   date: Date;
   products: CardProps[];
+}
+
+export interface IProducts {
+  products: number[];
 }

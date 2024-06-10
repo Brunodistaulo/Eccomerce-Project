@@ -6,10 +6,14 @@ import { userSession } from "@/types/types";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { Dropdown, DropdownItem } from "flowbite-react";
+import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from "react-icons/hi";
+import Link from "next/link";
 
 
 
-export function NavbarLayout() {
+
+const NavbarLayout = () => {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +27,13 @@ export function NavbarLayout() {
       setUserData(JSON.parse(userData!))
     }
   }, [pathname])
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('UserSession')
+    window.location.reload();
+  }
+
 
   return (
     <>
@@ -46,10 +57,16 @@ export function NavbarLayout() {
         </div>
         {
           userData?.token ? (
-            <div>
-              <p className="text-white text-lg">Welcome {userData?.userData.name}!</p>
-              <div>
+            <div className="mr-4 flex">
 
+              <p className="text-white text-lg ">Welcome {userData?.userData.name}!</p>
+
+              <div className="absolute right-3 text-xl top-7 text-white">
+                <Dropdown label="" inline className="text-black mt-2 rounded-lg">
+                  <DropdownItem href="/dashboard" className="hover:bg-black/10">Dashboard</DropdownItem>
+                  <DropdownItem href="/profile" className="hover:bg-black/10 transition-all duration-300 ">Settings</DropdownItem>
+                  <DropdownItem onClick={handleLogout} className="hover:bg-black/10 transition-all duration-300 rounded-b-lg border-none">Sign out</DropdownItem>
+                </Dropdown>
               </div>
             </div>
           ) : (
@@ -71,7 +88,7 @@ export function NavbarLayout() {
             <div className="hidden md:block items-center">
               <div className="ml-4 flex items-center justify-around space-x-16 text-sm">
                 <a
-                  href="/home"
+                  href="/"
                   className="w-20 text-center text-white hover:border-b hover:rounded-none rounded-lg p-2 "
                 >
                   Home
@@ -148,3 +165,6 @@ export function NavbarLayout() {
     </>
   );
 }
+
+
+export default NavbarLayout;

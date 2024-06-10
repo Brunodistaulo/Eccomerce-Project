@@ -7,7 +7,7 @@ import Link from "next/link";
 const Card: React.FC<CardProps> = ({ id,name, price, image }) => {
     return (
         <div >
-            <div className="group h-96 w-80 [perspective:1000px] mt-10">
+            <div className="group h-96 w-80 [perspective:1000px] my-10">
                 <div className="relative h-full w-full rounded-xl shadow-xl transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                     <div className="absolute inset-0">
                         <img className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40" src={image} alt={name} />

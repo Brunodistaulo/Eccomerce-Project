@@ -1,5 +1,5 @@
 import Carousel from "@/components/slider/page";
-import Product from "../../components/Card/product";
+import Product from "../Card/product";
 
 const HomeLayout: React.FC = () => {
     return (
@@ -17,7 +17,7 @@ const HomeLayout: React.FC = () => {
                         </div>
                     </a>
                 </div>
-                <a href="">
+                <a href="/product">
                     <div className="w-[250px] h-[350px] mr-28 flex flex-col items-center rounded-2xl shadow-lg">
                         <div className="flex absolute  w-[300px] h-[30px] bottom-1/4 bg-custom-gradient z-10"></div>
                         <img className="w-full h-3/4 rounded-t-2xl" src="https://i.pinimg.com/736x/c4/60/39/c4603933f5d17df6fee7f74ee14c523a.jpg" alt="the best notebooks" />
@@ -27,7 +27,7 @@ const HomeLayout: React.FC = () => {
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="/product">
                     <div className="w-[250px] h-[350px] flex flex-col items-center rounded-2xl shadow-lg">
                         <div className="flex absolute  w-[300px] h-[30px] bottom-1/4 bg-custom-gradient z-10"></div>
                         <img className="w-full h-3/4 rounded-t-2xl" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/7f1314114521039.603d17f7938d4.png" alt="the best accesories" />

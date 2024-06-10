@@ -11,7 +11,7 @@ import {
 } from "flowbite-react";
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
-export function Component() {
+const  Component = () => {
     return (
         <Footer container>
             <div className="w-full">
@@ -63,3 +63,5 @@ export function Component() {
         </Footer>
     );
 }
+
+export default Component;
