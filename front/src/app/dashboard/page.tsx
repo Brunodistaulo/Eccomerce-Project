@@ -25,14 +25,14 @@ const DashboardLayout: React.FC = () => {
             <Sidebar />
             {
                 userData ? (
-                    <div className="w-full ml-64">
+                    <div className="w-full ml-64 mt-5">
                         <h1 className="">Welcome {userData.userData.name}</h1>
                         <p className="">{userData.userData.phone}</p>
                         <p className="">{userData.userData.address}</p>
                     </div>
                 ) : (
-                    <div>
-                        <h1>Dashboard</h1>
+                    <div className="h-screen w-full">
+                        <h1 className="text-3xl text-center font-medium mt-5">You need to login</h1>
                     </div>
                 )
                 }

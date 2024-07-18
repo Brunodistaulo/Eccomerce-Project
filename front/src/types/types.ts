@@ -4,11 +4,12 @@ export interface CardProps {
   price: number;
   description: string;
   image: string;
+  caracteristics: string[];
 }
 
 
 export interface category {
-  name: string;
+  name: string
 }
 
 export interface loginProp {

@@ -9,6 +9,7 @@ interface IProduct {
   image: string;
   categoryId: number;
   stock: number;
+  caracteristics: string[];
 }
 
 const productsToPreLoad: IProduct[] = [
@@ -21,6 +22,13 @@ const productsToPreLoad: IProduct[] = [
       "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-11-Pro_Colors_091019_big.jpg.large.jpg",
     categoryId: 1,
     stock: 10,
+    caracteristics: [
+      "Dual-camera system",
+      "Liquid Retina display",
+      "Fast A13 Bionic chip",
+      "Long battery life",
+      "Water and dust resistant",
+    ],
   },
   {
     name: "MacBook Air",
@@ -31,6 +39,13 @@ const productsToPreLoad: IProduct[] = [
       "https://cdn-ipoint.waugi.com.ar/25322-large_default/macbook-air-13-m2-chip-8-core-cpu-8-core-gpu-256gb-starlight.jpg",
     categoryId: 2,
     stock: 10,
+    caracteristics: [
+      "Lightweight design",
+      "Retina display",
+      "M1 chip performance",
+      "All-day battery life",
+      "Magic Keyboard",
+    ],
   },
   {
     name: "iPad Pro",
@@ -41,16 +56,29 @@ const productsToPreLoad: IProduct[] = [
       "https://www.sagitariodigital.com.ar/wp-content/uploads/2022/11/IPAD-PRO-M2-8.jpg",
     categoryId: 3,
     stock: 10,
+    caracteristics: [
+      "Liquid Retina display",
+      "M1 chip performance",
+      "Apple Pencil support",
+      "All-day battery life",
+      "Pro cameras",
+    ],
   },
   {
     name: "Apple Watch Series 6",
     price: 399,
     description:
       "Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.",
-    image:
-      "https://m.media-amazon.com/images/I/516lAFj-xUL.jpg",
+    image: "https://m.media-amazon.com/images/I/516lAFj-xUL.jpg",
     categoryId: 4,
     stock: 10,
+    caracteristics: [
+      "Blood oxygen sensor",
+      "ECG app",
+      "Always-On Retina display",
+      "Fitness tracking",
+      "Water resistant",
+    ],
   },
   {
     name: "AirPods Pro",
@@ -61,6 +89,13 @@ const productsToPreLoad: IProduct[] = [
       "https://cdn-ipoint.waugi.com.ar/25136-large_default/apple-airpods-pro-2da-generacion.jpg",
     categoryId: 5,
     stock: 10,
+    caracteristics: [
+      "Active noise cancellation",
+      "Transparency mode",
+      "Customizable fit",
+      "Spatial audio",
+      "Sweat and water resistant",
+    ],
   },
   {
     name: "HomePod mini",
@@ -71,6 +106,13 @@ const productsToPreLoad: IProduct[] = [
       "https://acdn.mitiendanube.com/stores/002/092/809/products/homepod11-d592a9e1acf2cac18c16626013393751-640-0.png",
     categoryId: 6,
     stock: 10,
+    caracteristics: [
+      "360-degree audio",
+      "Siri integration",
+      "Smart home hub",
+      "Compact design",
+      "Intercom functionality",
+    ],
   },
 ];
 

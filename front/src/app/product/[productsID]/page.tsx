@@ -26,38 +26,56 @@ const ProductDetails = ({ params }: { params: { productsID: string } }) => {
         }
         dataFetch();
     }, [pathname])
-    const handleClick = (e: any) => {
+    const handleClick = () => {
         if (!userData?.token) {
-            alert('You must be logged in')
-            router.push('/login')
+            router.push('/login');
+            return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const productIndex = cart.findIndex((item: { id: number | undefined; }) => item.id === productDatails?.id);
+        if (productIndex === -1) {
+            cart.push(productDatails)
+            localStorage.setItem('cart', JSON.stringify(cart));
+            router.push('/cart');
         } else {
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-            const productExist = cart.some((product: CardProps) => {
-                if (product.id === Number(e?.target?.id)) return true;
-                return false
-            })
-            if (productExist) {
-                alert("Product added to cart")
-                router.push('/cart')
-            } else {
-                cart.push(productDatails);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                alert("Product added to cart")
-                router.push('/cart')
-            }
-        };
-    }
+            alert('Product already in cart');
+            router.push('/cart');
+        }
+
+    };
+    // const handleClick = (e: any) => {
+    //     if (!userData?.token) {
+    //         alert('You must be logged in')
+    //         router.push('/login')
+    //     } else {
+    //         const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    //         const productExist = cart.some((product: CardProps) => {
+    //             if (product.id === Number(e?.target?.id)) return true;
+    //             return false
+    //         })
+    //         if (productExist) {
+    //             alert("Product added to cart")
+    //             router.push('/cart')
+    //         } else {
+    //             cart.push(productDatails);
+    //             localStorage.setItem('cart', JSON.stringify(cart));
+    //             alert("Product added to cart")
+    //             router.push('/cart')
+    //         }
+    //     };
+    // }
 
     return (
-        <div className="w-full h-screen">
-            <Breadcrumb aria-label="Default breadcrumb example" className="my-2 ">
+        <div className="w-full">
+            <Breadcrumb aria-label="Default breadcrumb example" className="my-2">
                 <BreadcrumbItem icon={HiHome} href="/">Home</BreadcrumbItem>
                 <BreadcrumbItem href="/product">Products</BreadcrumbItem>
                 <BreadcrumbItem>{productDatails?.name} </BreadcrumbItem>
             </Breadcrumb>
             {
                 productDatails ? (
-                    <div className="flex bg-white w-[1300px] h-5/6 mt-7 mx-auto shadow-lg rounded-lg ">
+                    <div className="flex bg-white w-[1100px] h-fit mt-7 shadow-lg rounded-lg mx-auto ">
                         <div className="w-[1200px] h-3/4 mt-9">
                             <img className="rounded-lg w-full h-full" src={productDatails.image} alt={productDatails.name} />
                         </div>
@@ -73,7 +91,7 @@ const ProductDetails = ({ params }: { params: { productsID: string } }) => {
                                     <button>Buy now</button>
                                 </div>
                             </div>
-                            <div className="ml-10 mt-5">
+                            <div className="ml-10 my-5">
                                 <h3 className="">Specifications</h3>
                                 <li className="font-light text-sm mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, iusto.</li>
                                 <li className="font-light text-sm mt-1">Lorem ipsum dolor sit amet.</li>

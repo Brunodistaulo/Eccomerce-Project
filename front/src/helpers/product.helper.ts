@@ -6,7 +6,7 @@ export async function fetchProducts() {
   try {
     const res = await fetch(`${apiUrl}/products`, {
       method: "GET",
-      next: { revalidate: 1800 },
+      next: { revalidate: 0},
     });
     const data: CardProps[] = await res.json();
     return data;

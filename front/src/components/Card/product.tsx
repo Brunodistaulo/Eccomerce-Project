@@ -6,7 +6,7 @@ const Product: React.FC = async () => {
     const productsToPreLoad = await fetchProducts();
 
     return (
-        <div className="flex items-center justify-around flex-wrap mt-10">
+        <div className="flex items-center justify-around flex-wrap m-10">
             {
                 productsToPreLoad.map((product: any) => (
                     <Card key={product.id} {...product} />

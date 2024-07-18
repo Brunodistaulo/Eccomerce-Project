@@ -1,25 +1,29 @@
-"use client"
-
 import { CardProps } from "../../types/types";
 import Link from "next/link";
+import Image from "next/image";
 
 
-const Card: React.FC<CardProps> = ({ id,name, price, image }) => {
+const Card: React.FC<CardProps> = ({ id, name, price, image, caracteristics }) => {
     return (
-        <div >
-            <div className="group h-96 w-80 [perspective:1000px] my-10">
-                <div className="relative h-full w-full rounded-xl shadow-xl transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                    <div className="absolute inset-0">
-                        <img className="h-full w-full rounded-xl object-cover shadow-xl shadow-black/40" src={image} alt={name} />
-                    </div>
-                    <div className="absolute inset-0 h-full w-full rounded-xl bg-black/40 px-4 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
-                        <h2 className="text-3xl font-bold py-[30px]">{name}</h2>
-                        <p className="text-xl font-semibold py-4 absolute bottom-20 inset-x-0">Price: ${price}</p>
-                        <Link href={`/product/${id}`}>
-                        <button className="w-60 rounded-xl bg-black p-3 absolute bottom-5 left-1/2 -translate-x-1/2 transition hover:scale-105" >Datails</button>
-                        </Link>
-                    </div>
+        <div key={id} className="max-w-xs w-60 h-72 bg-white text-black rounded-lg shadow-md p-4 flex flex-col justify-between">
+            <img
+                className="w-60 h-40 object-cover rounded "
+                src={image}
+                alt={name}
+            />
+            <div className="mt-4">
+                <h2 className="text-lg font-semibold">{name}</h2>
+                <p className="text-sm text-gray-500 mt-1">{caracteristics}</p>
+            </div>
+            <div className="flex justify-between items-center mt-4">
+                <div className="flex space-x-1">
+                    <span className="text-yellow-400">★</span>
+                    <span className="text-yellow-400">★</span>
+                    <span className="text-yellow-400">★</span>
+                    <span className="text-yellow-400">★</span>
+                    <span className="text-gray-300">★</span>
                 </div>
+                <span className="text-lg font-semibold">$ {price}</span>
             </div>
         </div>
     );

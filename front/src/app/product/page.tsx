@@ -1,4 +1,3 @@
-'use client ';
 import Product from "@/components/Card/product";
 import React from "react";
 import { Breadcrumb, BreadcrumbItem } from "flowbite-react";

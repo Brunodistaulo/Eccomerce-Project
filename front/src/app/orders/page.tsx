@@ -5,6 +5,7 @@ import { IOrder, userSession } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import SideNavbar from "@/components/sidebar";
+import { format, parseISO } from 'date-fns'
 
 
 const Order = () => {
@@ -27,37 +28,55 @@ const Order = () => {
         userData?.token && dataFetch()
 
 
+
     }, [userData?.token])
 
     return (
         <div className="w-full">
             <SideNavbar />
             {
+
                 orders?.length > 0 ? (
-
-                    orders.map((order: IOrder) => (
-
-                        <div key={order.id} className="ml-64 border-l ">
-                            <h1>Order: {order.id}</h1>
-                            <h1>Status: {order.status}</h1>
-                            <h1>Date: {order.date.toLocaleString()}</h1>
-                            <h1>Products:{order.products.map((product) => (
-                                <div key={product.id}>
-                                    <h1>Name: {product.name}</h1>
-                                    <h1>Price: {product.price}</h1>
-                                    <h1>Description: {product.description}</h1>
-                                    <h1>Image: {product.image}</h1>
+                    orders.map((order: IOrder) => {
+                        const parsedDate = parseISO(order.date.toString());
+                        const dateSplit = format(parsedDate, 'dd/MM/yyyy');
+                        const timeSplit = format(parsedDate, 'HH:mm:ss');
+                        return (
+                            <div className="ml-64 my-5">
+                                <div key={order.id} className=" bg-white w-9/10 rounded-xl mx-auto p-2 shadow-sm">
+                                    <div className="flex flex-col">
+                                        <h1 className="text-green-500 uppercase text-xs">{order.status}</h1>
+                                        <div>
+                                            <h1>Order ID: {order.id}</h1>
+                                            <p>{dateSplit} {timeSplit}</p>
+                                        </div>
+                                    </div>
+                                    <div className="">{order.products.map((product) => (
+                                        <div className="flex " key={product.id}>
+                                            <div className="w-40">
+                                                <img className="w-40" src={product.image} alt={product.name} />
+                                            </div>
+                                            <div>
+                                                <p className="text-xl font-medium">{product.name}</p>
+                                                <p>$ {product.price}</p>
+                                                <p className="border w-[800px]"></p>
+                                                <div className="mt-6 flex justify-end">
+                                                    <button className="w-44 rounded-xl bg-black text-white p-2 hover:scale-105 transition-all duration-300">Buy again</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))} </div>
                                 </div>
-                            ))} </h1>
-                        </div>
+                            </div>
+                        )
 
-                    ))
+                    })
 
                 ) : (
-                    <div className="flex flex-col items-center mt-8">
+                    <div className="flex flex-col items-center mt-8 h-screen">
                         <h1 className="text-3xl mb-5">Cart:</h1>
                         <h2 className="text-xl mb-3">You don't have any orders</h2>
-                        <Link href="/home">
+                        <Link href="/">
                             <button className="w-60 rounded-xl bg-black text-white p-3 hover:scale-105 transition-all duration-300">Buy now!</button>
                         </Link>
                     </div>

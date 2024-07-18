@@ -28,9 +28,6 @@ const config: Config = {
       },
       width: {
         '9/10': '90%',
-      },
-      border : {
-        'na': 'none !important',
       }
     },
   },

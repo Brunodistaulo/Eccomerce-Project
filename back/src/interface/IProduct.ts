@@ -5,6 +5,7 @@ interface IProduct {
     image: string;
     categoryId: number;
     stock: number;
+    caracteristics: string[];
 }
 
 

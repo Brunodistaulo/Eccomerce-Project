@@ -1,87 +1,75 @@
-"use client";
-import React, { useState, useEffect } from 'react';
+'use client';
+import React, { useRef } from 'react';
 
-const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const images = [
+  "https://fastly.picsum.photos/id/846/800/400.jpg?hmac=YjmJaGReBkLBK-i2mjZYVQrv2Titn1m6X8ZpBMsLb6Y",
+  "https://fastly.picsum.photos/id/837/800/400.jpg?hmac=VVbJsYBLp7Nz0o1Kx9uD3DEHL7HZFZ4R0iTzjaJlby0",
+  "https://fastly.picsum.photos/id/868/800/400.jpg?hmac=txs01wsc-ThOSg5oUMgU3nagmPcm3DkqZkjcdn-qoCU",
+  "https://fastly.picsum.photos/id/588/800/400.jpg?hmac=XOOsTzsgxiQ5xzPw-YQNT8Efk9foe2quVI-m-0pODaY",
+  "https://fastly.picsum.photos/id/483/800/400.jpg?hmac=VyQ5toRxJGpXGvw1H_zZ8ut1PVW5D2tJcSuWvWbdLos"
+];
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
+const Slider: React.FC = () => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      const firstElement = sliderRef.current.children[0];
+      sliderRef.current.style.transition = 'margin-left 1s';
+      sliderRef.current.style.marginLeft = '-230%';
+      setTimeout(() => {
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = 'none';
+          sliderRef.current.appendChild(firstElement);
+          sliderRef.current.style.marginLeft = '-152%';
+        }
+      }, 1000);
+    }
   };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + 3) % 3);
+  
+  const handlePrev = () => {
+    if (sliderRef.current) {
+      const lastElement = sliderRef.current.children[sliderRef.current.children.length - 1];
+      sliderRef.current.style.transition = 'margin-left 1s';
+      sliderRef.current.style.marginLeft = '-70%';
+      setTimeout(() => {
+        if (sliderRef.current) {
+          sliderRef.current.style.transition = 'none';
+          sliderRef.current.insertBefore(lastElement, sliderRef.current.firstChild);
+          sliderRef.current.style.marginLeft = '-152%';
+        }
+      }, 1000);
+    }
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 7000);
-    return () => clearInterval(interval);
-  }, []);
+  
 
   return (
-    <div className="w-full ">
-      <div className="relative">
-        <div className="-ml-1 overflow-hidden relative h-[550px]">
-          <div className={`absolute inset-0 transition-transform duration-700 ease-in-out ${currentIndex === 0 ? 'block' : 'hidden'}`}>
+    <div className="relative overflow-hidden w-full mx-auto">
+      <div ref={sliderRef} className="flex w-[400%] h-[400px] ml-[-152%]">
+        {images.map((src, index) => (
+          <div key={index} className="w-[1200px] ml-[50px]">
             <img
-              src="https://static.vecteezy.com/system/resources/previews/004/672/772/non_2x/flash-sale-banner-design-template-offer-shopping-on-dark-blue-background-free-vector.jpg"
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="Slide 1"
+              className="w-full h-full block rounded-[15px] object-cover"
+              src={src}
+              alt={`image ${index + 1}`}
             />
           </div>
-          <div className={`absolute inset-0 transition-transform duration-700 ease-in-out ${currentIndex === 1 ? 'block' : 'hidden'}`}>
-            <img
-              src="https://pbs.twimg.com/media/GPG1U3iWMAAu0W2?format=jpg&name=4096x4096"
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="Slide 2"
-            />
-          </div>
-          <div className={`absolute inset-0 transition-transform duration-700 ease-in-out ${currentIndex === 2 ? 'block' : 'hidden'}`}>
-            <img
-              src="https://pbs.twimg.com/media/GPG4kf4XUAACEjh?format=jpg&name=4096x4096"
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="Slide 3"
-            />
-          </div>
-        </div>
-        <button
-          type="button"
-          className="flex absolute top-0 left-0 z-30 justify-center items-center h-full w-14 cursor-pointer group focus:outline-none"
-          onClick={prevSlide}
-        >
-          <span className="inline-flex justify-center items-center w-full h-full hover:bg-white/20 transition-all duration-500 ease-in-out">
-            <svg
-              className="w-5 h-5 text-white sm:w-6 sm:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="flex absolute top-0 right-0 z-30 justify-center items-center h-full w-14 cursor-pointer group focus:outline-none"
-          onClick={nextSlide}
-        >
-          <span className="inline-flex justify-center items-center w-full h-full hover:bg-white/20 transition-all duration-500 ease-in-out">
-            <svg
-              className="w-5 h-5 text-white sm:w-6 sm:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </span>
-        </button>
+        ))}
       </div>
+      <button
+        className="absolute w-[40px] h-[40px] border-none text-[20px] font-semibold font-mono bg-white rounded-full top-1/2 transform -translate-y-1/2 cursor-pointer right-[200px]"
+        onClick={handleNext}
+      >
+        &#62;
+      </button>
+      <button
+        className="absolute w-[40px] h-[40px] border-none text-[20px] font-semibold font-mono bg-white rounded-full top-1/2 transform -translate-y-1/2 cursor-pointer left-[200px]"
+        onClick={handlePrev}
+      >
+        &#60;
+      </button>
     </div>
   );
 };
 
-export default Carousel;
+export default Slider;
