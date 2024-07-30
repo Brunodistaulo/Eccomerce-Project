@@ -1,5 +1,6 @@
+import { CreateProductDto } from "../dtos/createProduct";
 import { Product } from "../entities/Product";
-import { ProductRepository } from "../repositories/product.repository";
+import { CreateProductRepository, ProductRepository } from "../repositories/product.repository";
 
 export const checkProductExists = async (itemId: number): Promise<boolean> => {
   const item: Product | null = await ProductRepository.findOneBy({
@@ -11,3 +12,7 @@ export const checkProductExists = async (itemId: number): Promise<boolean> => {
 export const getProductsService = async (): Promise<Product[]> => {
   return await ProductRepository.find();
 };
+
+export const CreateProductService = async (Product: CreateProductDto) => {
+  return await CreateProductRepository(Product);
+}
